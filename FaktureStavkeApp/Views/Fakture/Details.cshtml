@@ -1,0 +1,74 @@
+﻿@model FaktureStavkeApp.ViewModels.FakturaStavkaDetaljiVM
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Detalji fakture</h2>
+
+<div>
+
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.Name("BROJ FAKTURE")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BrojFakture)
+            <br />
+        </dd>
+
+        <dt>
+            @Html.Name("DATUM DOSPIJECA")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DatumDospijeca)
+        </dd>
+    </dl>
+</div>
+<br />
+<br />
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Opis</th>
+            <th>Količina</th>
+            <th>Jedinična cijena</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var i in Model.Stavke)
+        {
+            <tr>
+
+                <td>@i.Opis</td>
+                <td>@i.KolicinaProdaneStavke</td>
+                <td>@i.JedinicnaCijenaPDV</td>
+                <td>
+                    @Html.ActionLink("Obriši", "Delete", "FakturaStavka", new { id = i.FakturaStavkaId }, i.FakturaStavkaId)
+                </td>
+
+            </tr>
+        }
+    </tbody>
+</table>
+<div>
+    <dl>
+        <dt>
+            @Html.Name("CIJENA BEZ PDV-a")
+
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CijenaBezPDV)
+        </dd>
+    </dl>
+</div>
+<br />
+<p>
+    @*@Html.ActionLink("Uredi", "Edit", new { id = Model.FakturaID }) |*@
+    @Html.ActionLink("Nazad na listu", "Index")
+</p>

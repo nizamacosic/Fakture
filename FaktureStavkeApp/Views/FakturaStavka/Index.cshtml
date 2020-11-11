@@ -1,0 +1,49 @@
+﻿@model IEnumerable<FaktureStavkeApp.Models.FakturaStavka>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Stavke fakture</h2>
+<br />
+<br />
+<p>
+    @Html.ActionLink("Dodaj novu stavku", "Create")
+</p><br />
+<table class="table">
+    <tr>
+
+        <th>
+            @Html.DisplayNameFor(model => model.Opis)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.KolicinaProdaneStavke)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.JedinicnaCijenaPDV)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Opis)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.KolicinaProdaneStavke)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.JedinicnaCijenaPDV)
+            </td>
+            <td>
+                @Html.ActionLink("Uredi", "Edit", new { id = item.FakturaStavkaId }) |
+                @Html.ActionLink("Detalji", "Details", new { id = item.FakturaStavkaId }) |
+                @Html.ActionLink("Obriši", "Delete", new { id = item.FakturaStavkaId })
+            </td>
+        </tr>
+    }
+
+</table>

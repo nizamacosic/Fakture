@@ -1,0 +1,58 @@
+﻿@model List<FaktureStavkeApp.ViewModels.FakturaIndexVM>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Pregled faktura</h2>
+<br />
+<p>
+    @Html.ActionLink("Kreiraj novu fakturu", "Create")
+</p>
+<br />
+<br />
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayName("Broj fakture")
+        </th>
+        <th>
+            @Html.DisplayName("Datum dospijeca")
+        </th>
+        <th>
+            @Html.DisplayName("Korisnik")
+        </th>
+        <th>
+            @Html.DisplayName("Cijena bez PDV")
+        </th>
+        <th></th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.BrojFakture)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DatumDospijeca)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Korisnik)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UkupnaCijenaBezPDV)
+            </td>
+            <td>
+                @Html.ActionLink("Uredi", "Edit", new { id = item.FakturaID }) |
+                @Html.ActionLink("Stavke i detalji", "Details", new { id = item.FakturaID }) |
+                @Html.ActionLink("Obriši", "Delete", new { id = item.FakturaID })
+            </td>
+            <td>
+                @Html.ActionLink("Dodaj stavke", "Create", "FakturaStavka", new { id = item.FakturaID, @class = "btn btn-primary" }, item.FakturaID)
+            </td>
+        </tr>
+    }
+
+</table>

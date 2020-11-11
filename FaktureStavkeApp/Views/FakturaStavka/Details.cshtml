@@ -1,0 +1,42 @@
+﻿@model FaktureStavkeApp.Models.FakturaStavka
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Detalji</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        
+        <dt>
+            @Html.DisplayNameFor(model => model.Opis)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Opis)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.KolicinaProdaneStavke)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.KolicinaProdaneStavke)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.JedinicnaCijenaPDV)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.JedinicnaCijenaPDV)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Uredi", "Edit", new { id = Model.FakturaStavkaId }) |
+    @Html.ActionLink("Nazad", "Index")
+</p>
