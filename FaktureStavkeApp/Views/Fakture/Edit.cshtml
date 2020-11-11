@@ -13,23 +13,15 @@
 <div class="form-horizontal">
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    @*@Html.HiddenFor(model => model.FakturaID)
-        @Html.HiddenFor(model=>model.Id)*@
-    @*<input name="FakturaID" type="hidden" />*@
+ 
     @Html.EditorFor(model => model.FakturaID, new { htmlAttributes = new { @class = "hidden" } })
-    @Html.EditorFor(model => model.Id, new { htmlAttributes = new { @class = "hidden" } })
-
-    <input name="Id" type="hidden" />
+    @Html.EditorFor(model => model.IznosPorezaUPostotcima, new { htmlAttributes = new { @class = "hidden" } })
+    @Html.EditorFor(model => model.BrojFakture, new { htmlAttributes = new { @class = "hidden" } })
+    @Html.EditorFor(model => model.IznosPorezaUPostotcima, new { htmlAttributes = new { @class = "hidden" } })
+    @Html.EditorFor(model => model.KorisnikId, new { htmlAttributes = new { @class = "hidden" } })
+   
     <div class="form-group">
-        @Html.LabelFor(model => model.BrojFakture, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.BrojFakture, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.BrojFakture, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.DatumDospijeca, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.Label("Datum dospijeća", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.EditorFor(model => model.DatumDospijeca, new { htmlAttributes = new { @class = "form-control" } })
             @*<input type="date" value="model=>model.DatumDospijeca" name="DatumDospijeca" class="form-control"/>*@
@@ -37,11 +29,17 @@
         </div>
     </div>
 
-
+    <div class="form-group">
+        @Html.Label("Primatelj računa", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.PrimateljRacuna, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.PrimateljRacuna, "", new { @class = "text-danger" })
+        </div>
+    </div>
 
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Save" class="btn btn-default" />
+            <input type="submit" value="Sačuvaj" class="btn btn-success" />
         </div>
     </div>
 </div>

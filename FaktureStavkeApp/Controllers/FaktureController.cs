@@ -28,16 +28,20 @@ namespace FaktureStavkeApp.Controllers
                     FakturaID = a.FakturaID,
                     BrojFakture = a.BrojFakture,
                     DatumDospijeca = a.DatumDospijeca,
+                    DatumStvaranja=a.DatumStvaranja,
                     UkupnaCijenaBezPDV = db.FakturaStavke.Where(x => x.FakturaID == a.FakturaID).Sum(x => (double?)x.JedinicnaCijenaPDV * x.KolicinaProdaneStavke) ?? 0,
-                    UkupnaCijenaPDV = 0 //dodaj pdv,
+                    UkupnaCijenaPDV = (db.FakturaStavke.Where(x => x.FakturaID == a.FakturaID).Sum(x => (double?)x.JedinicnaCijenaPDV * x.KolicinaProdaneStavke) ?? 0)*(a.IznosPorezaUPostotcima/100)+((db.FakturaStavke.Where(x => x.FakturaID == a.FakturaID).Sum(x => (double?)x.JedinicnaCijenaPDV * x.KolicinaProdaneStavke) ?? 0)
+                    )
                  ,
-                    Korisnik = a.Korisnik.UserName
+                    Korisnik = a.Korisnik.UserName,
+                    PrimateljRacuna=a.PrimateljRacuna
 
                 }
                 ).ToList();
 
             return View(model);
         }
+ 
 
         // GET: Fakture/Details/5
         public ActionResult Details(int? id)
@@ -59,13 +63,14 @@ namespace FaktureStavkeApp.Controllers
             FakturaStavkaDetaljiVM model = null;
             if (fakture != null)
             {
-                var korisnik = db.Users.Find(fakture.Id);
+                var korisnik = db.Users.Find(fakture.KorisnikId);
                 model = new FakturaStavkaDetaljiVM
                 {
                     BrojFakture = fakture.BrojFakture,
                     DatumDospijeca = fakture.DatumDospijeca.ToShortDateString(),
+                    
 
-                    CijenaPDV = stavke.Sum(k => k.JedinicnaCijenaPDV),
+                    PrimateljRacuna=fakture.PrimateljRacuna,
                     Korisnik = korisnik.UserName,
                     Stavke = stavke.Select(
                   s => new FakturaStavka
@@ -75,7 +80,8 @@ namespace FaktureStavkeApp.Controllers
                       Opis = s.Opis,
                       FakturaStavkaId = s.FakturaStavkaId
                   }).ToList(),
-                    CijenaBezPDV = stavke.Sum(s => s.KolicinaProdaneStavke * s.JedinicnaCijenaPDV)
+                    CijenaBezPDV = stavke.Sum(s => s.KolicinaProdaneStavke * s.JedinicnaCijenaPDV),
+                    CijenaPDV = (stavke.Sum(s=>s.KolicinaProdaneStavke*s.JedinicnaCijenaPDV)*(fakture.IznosPorezaUPostotcima/100))+ stavke.Sum(s => s.KolicinaProdaneStavke * s.JedinicnaCijenaPDV)
 
 
 
@@ -83,12 +89,46 @@ namespace FaktureStavkeApp.Controllers
             }
             return View(model);
         }
+        
+        public List<PDV>GetPDVTip()
+        {
+            var list = new List<PDV>();
+
+
+            list.Add(new PDV
+            {
+                IznosPDV = 17,
+                Naziv = "PDVBiH",
+                PDVe = PDVenum.PDVBIH
+            });
+            list.Add(new PDV
+            {
+                IznosPDV = 25,
+                Naziv = "PDVHR",
+                PDVe = PDVenum.PDVHR
+            });
+            return list;
+        }
 
         // GET: Fakture/Create
         [Authorize]
         public ActionResult Create()
         {
-            return View();
+            FakturaAddVM model = new FakturaAddVM()
+            {
+                listPDV = new List<SelectListItem>()
+            };
+
+            var list = GetPDVTip();
+            foreach (var i in list)
+            {
+                model.listPDV.Add(new SelectListItem
+                {
+                    Text=i.Naziv,
+                    Value = i.PDVe.ToString()
+                });
+            }
+            return View(model);
         }
 
         // POST: Fakture/Create
@@ -96,19 +136,30 @@ namespace FaktureStavkeApp.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "BrojFakture,DatumDospijeca")] FakturaAddVM fakture)
+        public ActionResult Create([Bind(Include = "DatumDospijeca,PrimateljRacuna")] FakturaAddVM fakture)
         {
+          
             if (ModelState.IsValid)
             {
                 var temp = new Fakture
                 {
                     BrojFakture = fakture.BrojFakture,
                     DatumDospijeca = fakture.DatumDospijeca,
-                    Id = User.Identity.GetUserId<int>()
+                    KorisnikId = User.Identity.GetUserId<int>(),
+                    PrimateljRacuna=fakture.PrimateljRacuna,
+                    DatumStvaranja=DateTime.Now
 
 
                 };
+                var pdvlist = GetPDVTip();
+                var pdv = (PDVenum)fakture.intPDV;
+                PDV p= pdvlist.Where(x => x.PDVe == pdv).FirstOrDefault();
+                temp.IznosPorezaUPostotcima = p.IznosPDV;
+            
                 db.Fakture.Add(temp);
+                db.SaveChanges();
+                var t=db.Fakture.Find(temp.FakturaID);
+                t.BrojFakture = t.FakturaID;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -137,7 +188,7 @@ namespace FaktureStavkeApp.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "FakturaID,BrojFakture,DatumDospijeca,Id")] Fakture fakture)
+        public ActionResult Edit([Bind(Include = "FakturaID,BrojFakture,DatumDospijeca,KorisnikId,IznosPorezaUPostotcima,PrimateljRacuna")] Fakture fakture)
         {
             if (ModelState.IsValid)
             {

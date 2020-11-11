@@ -187,6 +187,26 @@
     <Compile Include="Migrations\202011101507128_Treca.Designer.cs">
       <DependentUpon>202011101507128_Treca.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202011111320323_Cet.cs" />
+    <Compile Include="Migrations\202011111320323_Cet.Designer.cs">
+      <DependentUpon>202011111320323_Cet.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202011111332305_Nova.cs" />
+    <Compile Include="Migrations\202011111332305_Nova.Designer.cs">
+      <DependentUpon>202011111332305_Nova.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202011111438549_Nova2.cs" />
+    <Compile Include="Migrations\202011111438549_Nova2.Designer.cs">
+      <DependentUpon>202011111438549_Nova2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202011111602100_Nova3.cs" />
+    <Compile Include="Migrations\202011111602100_Nova3.Designer.cs">
+      <DependentUpon>202011111602100_Nova3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202011111616436_Nova4.cs" />
+    <Compile Include="Migrations\202011111616436_Nova4.Designer.cs">
+      <DependentUpon>202011111616436_Nova4.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\FakturaStavka.cs" />
@@ -270,6 +290,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="MEF\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -293,6 +314,21 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202011101507128_Treca.resx">
       <DependentUpon>202011101507128_Treca.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011111320323_Cet.resx">
+      <DependentUpon>202011111320323_Cet.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011111332305_Nova.resx">
+      <DependentUpon>202011111332305_Nova.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011111438549_Nova2.resx">
+      <DependentUpon>202011111438549_Nova2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011111602100_Nova3.resx">
+      <DependentUpon>202011111602100_Nova3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011111616436_Nova4.resx">
+      <DependentUpon>202011111616436_Nova4.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

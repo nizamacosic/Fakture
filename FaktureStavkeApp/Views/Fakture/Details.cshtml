@@ -26,6 +26,13 @@
         <dd>
             @Html.DisplayFor(model => model.DatumDospijeca)
         </dd>
+        <dt>
+            @Html.Name("PRIMATELJ RAČUNA")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PrimateljRacuna)
+        </dd>
     </dl>
 </div>
 <br />
@@ -49,24 +56,19 @@
                 <td>@i.KolicinaProdaneStavke</td>
                 <td>@i.JedinicnaCijenaPDV</td>
                 <td>
-                    @Html.ActionLink("Obriši", "Delete", "FakturaStavka", new { id = i.FakturaStavkaId }, i.FakturaStavkaId)
+                    @Html.ActionLink("Obriši", "Delete", "FakturaStavka", new { id = i.FakturaStavkaId }, i.FakturaStavkaId) | 
+                    @Html.ActionLink("Uredi", "Edit", "FakturaStavka", new { id = i.FakturaStavkaId }, i.FakturaStavkaId)  
+
                 </td>
 
             </tr>
         }
     </tbody>
 </table>
-<div>
-    <dl>
-        <dt>
-            @Html.Name("CIJENA BEZ PDV-a")
+<br />
+<div style="text-align:right"><h5 style="font-weight:bold">Iznos bez PDV: @Model.CijenaBezPDV</h5></div>
 
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.CijenaBezPDV)
-        </dd>
-    </dl>
-</div>
+<div style="text-align:right"><h4 style="font-weight:bold">UKUPNO: @Model.CijenaPDV</h4></div>
 <br />
 <p>
     @*@Html.ActionLink("Uredi", "Edit", new { id = Model.FakturaID }) |*@

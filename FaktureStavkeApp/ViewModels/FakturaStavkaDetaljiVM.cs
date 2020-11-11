@@ -14,7 +14,8 @@ namespace FaktureStavkeApp.ViewModels
         public double CijenaBezPDV { get; set; }
         public double CijenaPDV { get; set; }
         public string Korisnik { get; set; }
+        public string PrimateljRacuna { get; set; }
         public List<FakturaStavka> Stavke { get; set; }
-        public double Ukupno { get; set; }
+        
     }
 }

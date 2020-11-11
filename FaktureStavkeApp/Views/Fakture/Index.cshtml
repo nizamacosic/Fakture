@@ -17,13 +17,22 @@
             @Html.DisplayName("Broj fakture")
         </th>
         <th>
-            @Html.DisplayName("Datum dospijeca")
+            @Html.DisplayName("Datum dospijeća")
         </th>
         <th>
-            @Html.DisplayName("Korisnik")
+            @Html.DisplayName("Datum stvaranja")
+        </th>
+        <th>
+            @Html.DisplayName("Račun kreirao:")
+        </th>
+        <th>
+            @Html.DisplayName("Primatelj računa")
         </th>
         <th>
             @Html.DisplayName("Cijena bez PDV")
+        </th>
+        <th>
+            @Html.DisplayName("Cijena sa PDV")
         </th>
         <th></th>
         <th></th>
@@ -31,28 +40,37 @@
 
     @foreach (var item in Model)
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.BrojFakture)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DatumDospijeca)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Korisnik)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UkupnaCijenaBezPDV)
-            </td>
-            <td>
-                @Html.ActionLink("Uredi", "Edit", new { id = item.FakturaID }) |
-                @Html.ActionLink("Stavke i detalji", "Details", new { id = item.FakturaID }) |
-                @Html.ActionLink("Obriši", "Delete", new { id = item.FakturaID })
-            </td>
-            <td>
-                @Html.ActionLink("Dodaj stavke", "Create", "FakturaStavka", new { id = item.FakturaID, @class = "btn btn-primary" }, item.FakturaID)
-            </td>
-        </tr>
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.BrojFakture)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.DatumDospijeca)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.DatumStvaranja)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Korisnik)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.PrimateljRacuna)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.UkupnaCijenaBezPDV)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.UkupnaCijenaPDV)
+    </td>
+    <td>
+        @Html.ActionLink("Stavke i detalji", "Details", new { id = item.FakturaID }, new { @class = "btn btn-primary" }) <br />
+        @Html.ActionLink("Uredi", "Edit", new { id = item.FakturaID, @class = "btn btn-default" }, new { @class = "btn btn-info" }) <br />
+        @Html.ActionLink("Obriši", "Delete", new { id = item.FakturaID }, new { @class = "btn btn-danger" })
+    </td>
+    <td>
+        @Html.ActionLink("Dodaj stavke", "Create", "FakturaStavka", new { id = item.FakturaID }, item.FakturaID)
+    </td>
+</tr>
     }
 
 </table>

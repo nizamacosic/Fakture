@@ -28,11 +28,12 @@ namespace FaktureStavkeApp.Controllers
             List<FakturaStavka> stavke = db.FakturaStavke.Where(x => x.FakturaID == id).ToList();
 
 
-            var user = db.Users.Find(fa.Id);
+            var user = db.Users.Find(fa.KorisnikId);
             var model = new FakturaStavkaDetaljiVM
             {
                 BrojFakture = fa.BrojFakture,
                 DatumDospijeca = fa.DatumDospijeca.ToShortDateString(),
+                PrimateljRacuna=fa.PrimateljRacuna,
 
                 CijenaPDV = stavke.Sum(k => k.JedinicnaCijenaPDV),
                 Korisnik = user.UserName,

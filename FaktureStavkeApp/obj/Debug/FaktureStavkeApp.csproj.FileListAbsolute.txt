@@ -110,3 +110,8 @@ C:\Users\User\source\repos\FaktureStavkeApp\FaktureStavkeApp\obj\Debug\FaktureSt
 C:\Users\User\source\repos\FaktureStavkeApp\FaktureStavkeApp\obj\Debug\FaktureStavkeApp.csproj.GenerateResource.cache
 C:\Users\User\source\repos\FaktureStavkeApp\FaktureStavkeApp\obj\Debug\FaktureStavkeApp.Migrations.Druga.resources
 C:\Users\User\source\repos\FaktureStavkeApp\FaktureStavkeApp\obj\Debug\FaktureStavkeApp.Migrations.Treca.resources
+C:\Users\User\source\repos\FaktureStavkeApp\FaktureStavkeApp\obj\Debug\FaktureStavkeApp.Migrations.Cet.resources
+C:\Users\User\source\repos\FaktureStavkeApp\FaktureStavkeApp\obj\Debug\FaktureStavkeApp.Migrations.Nova.resources
+C:\Users\User\source\repos\FaktureStavkeApp\FaktureStavkeApp\obj\Debug\FaktureStavkeApp.Migrations.Nova2.resources
+C:\Users\User\source\repos\FaktureStavkeApp\FaktureStavkeApp\obj\Debug\FaktureStavkeApp.Migrations.Nova3.resources
+C:\Users\User\source\repos\FaktureStavkeApp\FaktureStavkeApp\obj\Debug\FaktureStavkeApp.Migrations.Nova4.resources
